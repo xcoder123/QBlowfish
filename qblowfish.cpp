@@ -24,7 +24,7 @@ QBlowfish::QBlowfish(QString key)
     calcSubKey(key);
 }
 
-QByteArray QBlowfish::encyrpt(QByteArray data)
+QByteArray QBlowfish::encrypt(QByteArray data)
 {
     QByteArray cryptedData;
 
@@ -50,7 +50,6 @@ QByteArray QBlowfish::decrypt(QByteArray cryptedData)
         data.append( convertToChar(L, R) );
     }
 
-    qDebug() << "Decrypted data: " << data;
 
     return data;
 }

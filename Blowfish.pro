@@ -14,11 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    qblowfish.cpp
+    qblowfish.cpp \
+    qxorcipher.cpp
 
 HEADERS  += mainwindow.h \
     HexPi.h \
-    qblowfish.h
+    qblowfish.h \
+    qxorcipher.h
 
 FORMS    += mainwindow.ui
 

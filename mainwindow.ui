@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Blowfish Example</string>
+   <string>Blowfish/XOR Encryption Example</string>
   </property>
   <property name="windowIcon">
    <iconset resource="res.qrc">
@@ -70,6 +70,34 @@
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QComboBox" name="selEncryption">
+        <item>
+         <property name="text">
+          <string>Blowfish</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>XOR</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="selDataType">
+        <item>
+         <property name="text">
+          <string>Rich Text (html)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Simple Text</string>
+         </property>
+        </item>
+       </widget>
+      </item>
       <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">

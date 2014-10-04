@@ -26,6 +26,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "HexPi.h"
 #include "qblowfish.h"
+#include "qxorcipher.h"
 
 namespace Ui {
 class MainWindow;
@@ -38,7 +39,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
+    enum { BLOWFISH, XOR };
+    enum { RICH_TEXT, SIMPLE_TEXT };
 
 
 private slots:
@@ -49,6 +51,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QBlowfish blowfish;
+    QXORCipher xorCipher;
 
 };
 

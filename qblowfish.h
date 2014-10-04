@@ -31,7 +31,7 @@ public:
 
     void initBoxes();
     void calcSubKey(QString keyStr);
-    QByteArray encyrpt(QByteArray data);
+    QByteArray encrypt(QByteArray data);
     QByteArray decrypt(QByteArray cryptedData);
 
 

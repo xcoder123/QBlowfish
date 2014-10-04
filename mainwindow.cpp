@@ -20,6 +20,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -35,8 +37,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::encyrptClicked()
 {
-    qDebug() << QByteArray(ui->inputEdit->toHtml().toUtf8());
-    QByteArray encyptedData = blowfish.encyrpt(  QByteArray(ui->inputEdit->toHtml().toUtf8()) );
+
+    QByteArray encyptedData;
+
+    QString dataString = ui->selDataType->currentIndex() == RICH_TEXT ?
+                            ui->inputEdit->toHtml() : ui->inputEdit->toPlainText();
+
+    if(ui->selEncryption->currentIndex() == BLOWFISH)
+        encyptedData = blowfish.encrypt(  QByteArray(dataString.toUtf8()) );
+    else
+        encyptedData = xorCipher.encrypt(  QByteArray(dataString.toUtf8()) );
 
     ui->statusBar->showMessage("Data encrypted!");
     ui->outputEdit->setHtml( encyptedData.toBase64() );
@@ -45,7 +55,12 @@ void MainWindow::encyrptClicked()
 
 void MainWindow::decryptClicked()
 {
-    QByteArray decryptedData = blowfish.decrypt( QByteArray::fromBase64( QByteArray( ui->inputEdit->toPlainText().toUtf8() ) ) );
+    QByteArray decryptedData;
+
+    if(ui->selEncryption->currentIndex() == BLOWFISH)
+        decryptedData = blowfish.decrypt( QByteArray::fromBase64( QByteArray( ui->inputEdit->toPlainText().toUtf8() ) ) );
+    else
+        decryptedData = xorCipher.decrypt( QByteArray::fromBase64( QByteArray( ui->inputEdit->toPlainText().toUtf8() ) ) );
 
     ui->statusBar->showMessage("Data decrypted!");
     ui->outputEdit->setHtml( decryptedData );
@@ -55,6 +70,7 @@ void MainWindow::decryptClicked()
 void MainWindow::setKey()
 {
     blowfish.calcSubKey( ui->keyEdit->text() );
+    xorCipher.setKey( ui->keyEdit->text() );
     ui->statusBar->showMessage("Key has been set");
 }
 
